@@ -1,24 +1,22 @@
+// backend/server.js
 const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-
-const apiRoutes = require('./routes/api');
-
-dotenv.config(); // Loads environment variables from a .env file
+const cors = require('cors'); // Import cors
+const { getBlogs, createBlog } = require('./api/blogs'); // Import the getBlogs function
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+// Enable CORS for all origins (or specify allowed origins)
+app.use(cors());  // This will allow requests from any domain
+
+// Middleware to parse JSON
 app.use(express.json());
 
-app.use('/api', apiRoutes);
+// API route to get posts
+app.get('/api/blogs', getBlogs);
+app.post('/api/blogs', createBlog);
 
-// Example route
-app.get('/', (req, res) => {
-  res.send('Hello from the backend!');
-});
-
+// Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });

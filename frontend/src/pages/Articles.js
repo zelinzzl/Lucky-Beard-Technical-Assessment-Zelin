@@ -1,4 +1,6 @@
+// frontend/src/pages/Articles.js
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'; // Import useParams to get the post ID from URL
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import BlogPost from '../components/BlogPost';
@@ -6,6 +8,7 @@ import Image from '../assets/images/card-header.png';
 import axios from 'axios';
 
 function Articles() {
+    const { id } = useParams(); // Get the post ID from URL params
     const [article, setArticle] = useState({
         author: '',
         date: '',
@@ -13,16 +16,18 @@ function Articles() {
         content: '',
     });
 
-    // Fetch data from backend
+    // Fetch data for the specific article based on the ID
     useEffect(() => {
-        axios.get('/api/article')
-            .then((response) => {
-                setArticle(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching the article:', error);
-            });
-    }, []);
+        if (id) {
+            axios.get(`/api/article/${id}`) // Assuming your backend has an endpoint like this
+                .then((response) => {
+                    setArticle(response.data);
+                })
+                .catch((error) => {
+                    console.error('Error fetching the article:', error);
+                });
+        }
+    }, [id]); // Dependency on 'id' to refetch if it changes
 
     return (
         <div className="bg-background">
