@@ -41,19 +41,14 @@ function BlogListing() {
                             <BlogPost key={index} post={post} />
                         ))}
                     </div>
-
-                    <div className="grid grid-cols-5 grid-rows-5 gap-4 p-10">
-                        <div className="col-span-3 row-span-3">
-                            <VideoBlock />
-                        </div>
-                        <div className="col-span-2 row-span-5 col-start-4">
-                            <BlogQuote />
-                            <BlogQuote />
-                            <BlogQuote />
-                        </div>
-                        <div className="col-span-3 row-span-2 row-start-4">
-                            <BlogQuote />
-                        </div>
+                    
+                    <div className="grid grid-cols-5 grid-rows-4 gap-8 p-20">
+                        <div className="col-span-3 row-span-3"><VideoBlock /></div>
+                        <div className="col-span-2 col-start-4"><BlogQuote /></div>
+                        <div className="col-span-2 col-start-4 row-start-2"><BlogQuote /></div>
+                        <div className="col-span-2 col-start-4 row-start-3"><BlogQuote /></div>
+                        <div className="col-span-2 col-start-4 row-start-4"><BlogQuote /></div>
+                        <div className="col-span-3 col-start-1 row-start-4"><BlogQuote /></div>
                     </div>
 
                     <div className="mx-auto flex justify-center items-center space-x-8 flex-wrap max-w-7xl mb">

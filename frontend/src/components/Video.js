@@ -3,7 +3,7 @@ import Video from '../assets/videos/video.mp4';
 
 function VideoBlock() {
     return (
-        <div className="relative w-64 h-36 overflow-hidden"> 
+        <div className="relative w-full h-full overflow-hidden"> 
             <video
                 className="absolute inset-0 w-full h-full object-cover"
                 autoPlay
