@@ -119,10 +119,10 @@ function BlogCreation() {
                             className="border rounded-md p-2"
                         >
                             <option value="">Select</option>
-                            <option value="Technology">Technology</option>
-                            <option value="Lifestyle">Lifestyle</option>
-                            <option value="Business">Business</option>
-                            <option value="Health">Health</option>
+                            <option value="LAUNCHPAD">LAUNCHPAD</option>
+                            <option value="NOTICE">NOTICE</option>
+                            <option value="TEAM BUILD">TEAM BUILD</option>
+                            <option value="BEARDATORIUM">BEARDATORIUM</option>
                         </select>
                     </div>
 
