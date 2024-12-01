@@ -1,9 +1,14 @@
-// backend/api/posts.js
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
+const multer = require('multer'); // Middleware for handling file uploads
+const path = require('path');
 
 // Initialize Supabase client
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY);
+
+// Middleware for handling image uploads (using multer)
+const storage = multer.memoryStorage(); // Store file in memory
+const upload = multer({ storage });
 
 async function getArticle(req, res) {
   try {
@@ -12,7 +17,7 @@ async function getArticle(req, res) {
     // Fetch the specific post from Supabase using the ID
     const { data, error } = await supabase
       .from('blogs') // Assuming the table name is 'blogs'
-      .select('id, name, category, image_url, content, created_at') // Select specific fields
+      .select('id, title, name, category, image_url, content, created_at') // Select specific fields
       .eq('id', id) // Filter by ID
 
     // If there's an error fetching from Supabase
@@ -39,7 +44,7 @@ async function getBlogs(req, res) {
     // Fetch posts from Supabase (adjust the query as per your needs)
     const { data, error } = await supabase
       .from('blogs') // Assuming the table name is 'blogs'
-      .select('id, name, category, image_url, content, created_at') // Select specific fields
+      .select('id, name, title, category, image_url, content, created_at') // Select specific fields
 
     // If there's an error fetching from Supabase
     if (error) {
@@ -54,41 +59,59 @@ async function getBlogs(req, res) {
   }
 }
 
-// Function to handle creating a new blog post
 async function createBlog(req, res) {
   try {
-    const { name, category, image_url, content } = req.body; // Get data from the request body
+    // Use multer to parse the body for file uploads
+    const { name, title, category, content } = req.body;
+    let image_url = '';
 
-    // Validate the incoming request data (make sure all required fields are provided)
-    if (!name || !category || !content) {
-      return res.status(400).json({ message: 'Missing required fields: name, category, content' });
+    // Check if a file was uploaded and handle it
+    if (req.file) {
+      const { originalname, buffer } = req.file;
+
+      // Upload the image to Supabase Storage
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('images') // Replace with your Supabase storage bucket name
+        .upload(`blogs/${Date.now()}_${originalname}`, buffer, {
+          contentType: req.file.mimetype,
+        });
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      // Get the public URL for the uploaded image
+      const { data: publicUrlData } = supabase.storage
+        .from('images')
+        .getPublicUrl(uploadData.path);
+      image_url = publicUrlData.publicUrl;
     }
 
-    // Insert the new blog post into the Supabase database
+    // Insert the blog post data, including the title and image_url
     const { data, error } = await supabase
-      .from('blogs') // Table name
+      .from('blogs')
       .insert([
         {
           name,
+          title,
           category,
-          image_url: image_url || '', // If image_url is not provided, insert an empty string
-          content
-        }
+          image_url,
+          content,
+        },
       ])
-      .single(); // Use .single() to return the inserted row as a single object
+      .single();
 
-    // If there's an error inserting the data
     if (error) {
       throw error;
     }
 
-    // Respond with the created post data
-    res.status(201).json(data); // Send the inserted blog post as a response
+    // Respond with the created blog post data
+    res.status(201).json(data);
   } catch (error) {
     console.error("Error creating blog:", error);
-    res.status(500).send('Error creating blog post');
+    res.status(500).json({ message: 'Error creating blog post', error: error.message });
   }
 }
 
 // Export the functions so they can be used in server.js
-module.exports = { getArticle, getBlogs, createBlog };
+module.exports = { getArticle, getBlogs, createBlog, upload };

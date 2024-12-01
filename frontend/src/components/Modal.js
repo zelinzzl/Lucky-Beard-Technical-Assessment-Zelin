@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // You may want to use this if you'd like to navigate in your app
+import React from 'react';
 
-// Modal Component
-// Modal Component
 const Modal = ({ title, content, isOpen, onClose }) => {
     if (!isOpen) return null;
   

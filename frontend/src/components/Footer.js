@@ -22,7 +22,7 @@ function Footer() {
   };
 
   return (
-    <div className="bg-footer text-white py-6 px-4 w-full">
+    <div className="bg-footer text-white py-6 px-4 w-full animate-slideUp">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <Link to="/">

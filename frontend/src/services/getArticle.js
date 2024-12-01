@@ -10,9 +10,11 @@ export const getArticle = async (id, setArticle, setLoading, setError) => {
 
         setArticle({
             author: data.name || 'Unknown Author',
+            title: data.title || 'Unknown Title',
             date: new Date(data.created_at).toLocaleDateString() || 'Unknown Date',
             category: data.category || 'Uncategorized',
             content: data.content || 'No content available',
+            image: data.image_url || '',
         });
     } catch (err) {
         console.error('Error fetching article:', err);

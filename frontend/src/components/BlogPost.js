@@ -13,6 +13,8 @@ function BlogPost({ blog }) {
     return <p>No blog found.</p>;
   }
 
+  console.log(blog);
+
   // Define the category-to-animation mapping
   const categoryAnimations = {
     'LAUNCHPAD': Blog,
@@ -22,26 +24,24 @@ function BlogPost({ blog }) {
     'Other': schedule,
   };
 
-  // Set the Lottie animation based on the blog's category, default to 'lightbulb' if category doesn't match
   const selectedAnimation = categoryAnimations[blog.category];
 
-  // Define the Lottie animation options
   const lottieOptions = {
-    loop: true, // Set to true if you want the animation to repeat
-    autoplay: true, // Set to true if you want the animation to autoplay
-    animationData: selectedAnimation, // Set the animation data to the selected category animation
+    loop: true,
+    autoplay: true,
+    animationData: selectedAnimation,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice', // Adjust the rendering settings
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
 
   return (
-    <div className="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden flex flex-col h-96"> {/* Enforce consistent height */}
+    <div className="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden flex flex-col h-96">
       {/* Image Section */}
       <img
         src={blog.image_url || no_image}
         alt="Blog Post"
-        className="w-full h-48 object-cover"
+        className="w-full h-48 object-cover overflow-hidden"
       />
 
       {/* Content Section */}
@@ -57,25 +57,22 @@ function BlogPost({ blog }) {
         </div>
 
         {/* Blog Title */}
-        <h2 className="mt-4 text-xl font-semibold text-gray-800 flex items-center">
-          {blog.name}
+        <h2 className="mt-4 text-xl font-bold text-gray-800 flex items-center">
+          {blog.title || "Untitled"}
         </h2>
 
         {/* Blog Description */}
         <div
           className="mt-2 text-sm text-gray-600 flex-grow overflow-hidden"
           dangerouslySetInnerHTML={{
-            __html: `${blog.content.substring(0, 100)}...`, // Truncate the content for preview
+            __html: `${blog.content.substring(0, 100)}...`,
           }}
         ></div>
 
         {/* Read More Button */}
         <div className="mt-4">
           <Link
-            to={{
-              pathname: `/Articles/${blog.id}`,
-              state: { blog },
-            }}
+            to={`/Articles/${blog.id}`}
             className="px-6 py-2 text-white bg-button rounded-xl hover:bg-white hover:text-button hover:border-2 hover:border-button"
           >
             Read more &rarr;

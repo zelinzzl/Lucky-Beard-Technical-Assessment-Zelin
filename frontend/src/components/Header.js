@@ -5,7 +5,7 @@ import logo from '../assets/images/Logo.png';
 
 function Header() {
     return (
-        <div className="flex items-center justify-between p-10 mx-5">
+        <div className="flex items-center justify-between p-10 mx-5 animate-slideDown">
             <Link to="/">
                 <img src={logo} alt="Logo" className="w-50 h-auto" />
             </Link>
