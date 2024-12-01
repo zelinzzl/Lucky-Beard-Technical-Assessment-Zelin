@@ -1,10 +1,7 @@
-// frontend/src/services/apiService.js
 import axios from 'axios';
 
-// Define the base URL for the API
 const BASE_URL = 'http://localhost:5000/api'; // Change this to your backend URL
 
-// Function to fetch posts from the backend
 export const getBlogs = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/blogs`);

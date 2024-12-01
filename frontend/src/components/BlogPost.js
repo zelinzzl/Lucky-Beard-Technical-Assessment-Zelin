@@ -15,12 +15,11 @@ function BlogPost({ blog }) {
 
   // Define the category-to-animation mapping
   const categoryAnimations = {
-    'Technology': lightbulb,
-    'Blog': Blog,
-    'Schedule': schedule,
-    'Team': team,
-    'Announcement': Announcement,
-    'Lifestyle': Blog,
+    'LAUNCHPAD': Blog,
+    'BEARDATORIUM': lightbulb,
+    'TEAM BUILD': team,
+    'NOTICE': Announcement,
+    'Other': schedule,
   };
 
   // Set the Lottie animation based on the blog's category, default to 'lightbulb' if category doesn't match

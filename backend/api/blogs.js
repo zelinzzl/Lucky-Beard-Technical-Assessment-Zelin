@@ -5,6 +5,34 @@ require('dotenv').config();
 // Initialize Supabase client
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY);
 
+async function getArticle(req, res) {
+  try {
+    const { id } = req.params; // Get the article ID from the request parameters
+
+    // Fetch the specific post from Supabase using the ID
+    const { data, error } = await supabase
+      .from('blogs') // Assuming the table name is 'blogs'
+      .select('id, name, category, image_url, content, created_at') // Select specific fields
+      .eq('id', id) // Filter by ID
+
+    // If there's an error fetching from Supabase
+    if (error) {
+      throw error;
+    }
+
+    // If no data is found for the specified ID
+    if (!data || data.length === 0) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    // Send the fetched data as a response
+    res.status(200).json(data[0]); // Assuming the ID is unique, so we return the first item
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    res.status(500).send('Error fetching post');
+  }
+}
+
 // Function to handle fetching blog posts
 async function getBlogs(req, res) {
   try {
@@ -63,4 +91,4 @@ async function createBlog(req, res) {
 }
 
 // Export the functions so they can be used in server.js
-module.exports = { getBlogs, createBlog };
+module.exports = { getArticle, getBlogs, createBlog };

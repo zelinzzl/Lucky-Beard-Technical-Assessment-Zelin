@@ -67,7 +67,7 @@ function BlogListing() {
                         </div>
                     </div>
 
-                    <div className="mx-auto flex justify-center items-center space-x-8 flex-wrap max-w-7xl mb">
+                    <div className="mx-auto flex justify-center items-center space-x-8 flex-wrap max-w-7xl mb-10">
                         {blogs.slice(3).map((blog, index) => (
                             <BlogPost key={index} blog={blog} />
                         ))}
