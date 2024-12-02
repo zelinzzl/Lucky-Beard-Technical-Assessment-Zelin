@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/api'; // Change this to your backend URL
+const BASE_URL = 'http://localhost:5000/api'; 
 
 export const getArticle = async (id, setArticle, setLoading, setError) => {
     try {

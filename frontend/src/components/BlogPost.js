@@ -13,7 +13,7 @@ function BlogPost({ blog }) {
     return <p>No blog found.</p>;
   }
 
-  console.log(blog);
+  // console.log(blog);
 
   // Define the category-to-animation mapping
   const categoryAnimations = {

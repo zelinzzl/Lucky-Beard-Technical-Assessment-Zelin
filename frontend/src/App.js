@@ -17,6 +17,8 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<BlogListing />} />
+                <Route path="/blogs/:name" element={<BlogListing />} />
+                <Route path="/blogs/category/:category" element={<BlogListing />} />
                 <Route path="/BlogCreation" element={<BlogCreation />} />
                 <Route path="/Articles/:id" element={<Articles />} />
                 <Route path="*" element={<NotFound />} /> {/* 404 Page */}
