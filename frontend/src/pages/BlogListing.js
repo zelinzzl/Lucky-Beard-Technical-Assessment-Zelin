@@ -124,26 +124,26 @@ function BlogListing() {
 
         {/* Video Block and top rated Blogs */}
         <div className="pt-20 lg:pl-50 sm:px-4 animate-slideUp">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid-rows-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid-rows-4 pl-52">
             {/* Video Block */}
-            <div className="col-span-1 sm:col-span-2 lg:col-span-3 row-span-4">
+            <div className="col-span-3 sm:col-span-2 lg:col-span-3 row-span-3 pt-10">
               <VideoBlock />
             </div>
 
             {/* Blog Quotes */}
-            <div className="col-span-1 sm:col-span-2 lg:col-span-2 lg:col-start-4">
+            <div className="col-span-2 sm:col-span-2 lg:col-span-2 lg:col-start-4">
               <BlogQuote blogs={filteredBlogs.slice(0, 1)} />
             </div>
-            <div className="col-span-1 sm:col-span-2 lg:col-span-2 lg:col-start-4 row-start-2">
+            <div className="col-span-2 sm:col-span-2 lg:col-span-2 lg:col-start-4 row-start-2">
               <BlogQuote blogs={filteredBlogs.slice(1, 2)} />
             </div>
-            <div className="col-span-1 sm:col-span-2 lg:col-span-2 lg:col-start-4 row-start-3">
+            <div className="col-span-2 sm:col-span-2 lg:col-span-2 lg:col-start-4 row-start-3">
               <BlogQuote blogs={filteredBlogs.slice(2, 3)} />
             </div>
-            <div className="col-span-1 sm:col-span-2 lg:col-span-2 lg:col-start-4 row-start-4">
+            <div className="col-span-2 sm:col-span-2 lg:col-span-2 lg:col-start-4 row-start-4">
               <BlogQuote blogs={filteredBlogs.slice(3, 4)} />
             </div>
-            <div className="col-span-1 sm:col-span-2 lg:col-span-3 lg:row-start-5">
+            <div className="col-span-2 sm:col-span-2 lg:col-span-3 lg:row-start-4">
               <BlogQuote blogs={filteredBlogs.slice(4, 5)} />
             </div>
           </div>
@@ -161,8 +161,11 @@ function BlogListing() {
               </div>
             ))
           ) : (
-            currentBlogs.map((blog, index) => (
-              <div key={index} className={`relative max-w-xs w-full h-96 bg-white shadow-lg rounded-lg flex justify-center items-center ${index === 0 ? 'mt-8' : ''}`}>
+            currentBlogs.slice(3).map((blog, index) => (
+              <div
+                key={index}
+                className={`relative max-w-xs w-full h-96 bg-white shadow-lg rounded-lg flex justify-center items-center ${index === 0 ? 'mt-8' : ''}`}
+              >
                 <BlogPost blog={blog} />
               </div>
             ))

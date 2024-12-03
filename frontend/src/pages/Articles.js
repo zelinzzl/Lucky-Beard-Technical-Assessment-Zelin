@@ -133,7 +133,8 @@ function Articles() {
           <img
             src={article.image || no_image}
             alt="Blog Post"
-            className="w-[1700px] h-[700px] object-cover mx-auto"
+            className="w-[1500px] h-[700px] object-cover mx-auto"
+            // className="w-[1700px] h-[700px] object-cover mx-auto"
           />
         </div>
         <button

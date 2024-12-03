@@ -26,28 +26,34 @@ function PreviewModal({ isOpen, onClose, article }) {
         />
         </div>
 
-        {/* Article Metadata */}
-        <div className="space-y-4 mb-6">
-          <div className="text-sm text-gray-600">
-            <p>
-              <strong>Author:</strong> {article.author || "John Doe"}
-            </p>
-            <p>
-              <strong>Date:</strong> {article.date || "14/11/2024"}
-            </p>
-            <p>
-              <strong>Category:</strong> {article.category || "NOTICE"}
-            </p>
-          </div>
-        </div>
-
-        {/* Article Content */}
-        <div className="prose max-w-full text-gray-800 leading-relaxed">
-          <div
-            dangerouslySetInnerHTML={{
-              __html: article.content || "No content available.",
-            }}
-          />
+        
+        <div className="grid grid-cols-5 grid-rows-5 gap-4">
+            <div className="col-span-2 row-span-5">
+              {/* Article Metadata */}
+              <div className="space-y-4 mb-6">
+                <div className="text-sm text-gray-600">
+                  <p>
+                    <strong>Author:</strong> {article.author || "John Doe"}
+                  </p>
+                  <p>
+                    <strong>Date:</strong> {article.date || "14/11/2024"}
+                  </p>
+                  <p>
+                    <strong>Category:</strong> {article.category || "NOTICE"}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-span-3 row-span-5 col-start-3">
+              {/* Article Content */}
+              <div className="prose max-w-full text-gray-800 leading-relaxed">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: article.content || "No content available.",
+                  }}
+                />
+              </div>
+            </div>
         </div>
       </div>
     </div>

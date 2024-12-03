@@ -181,7 +181,8 @@ function BlogCreation() {
         <img
           src={imagePreview}
           alt="Blog Post"
-          className="w-[1700px] h-[700px] object-cover mx-auto"
+          className="w-[1500px] h-[700px] object-cover mx-auto"
+          // className="w-[1700px] h-[700px] object-cover mx-auto"
         />
       </div>
       <main className="flex flex-col items-center justify-center px-10 py-10">
